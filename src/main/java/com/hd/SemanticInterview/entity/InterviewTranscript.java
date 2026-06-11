@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="semantic_transcript")
@@ -19,6 +21,11 @@ public class InterviewTranscript {
     @CreationTimestamp
     @Column(name = "uploaded_at", nullable = false)
     private LocalDate uploadDate;
+    @OneToMany(
+            mappedBy = "interviewTranscript",
+            cascade = CascadeType.ALL
+    )
+    private List<TranscriptChunk> chunks = new ArrayList<>();
 
     public InterviewTranscript() {}
 
